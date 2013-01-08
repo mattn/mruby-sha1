@@ -2,8 +2,6 @@
 #include <mruby/string.h>
 #include "sha1.h"
 
-static struct RClass *_class_sha1;
-
 /*********************************************************
  * main
  *********************************************************/
@@ -50,7 +48,7 @@ mrb_sha1_hex(mrb_state *mrb, mrb_value self)
 
 void
 mrb_mruby_sha1_gem_init(mrb_state* mrb) {
-  _class_sha1 = mrb_define_module(mrb, "SHA1");
+  struct RClass *_class_sha1 = mrb_define_module(mrb, "SHA1");
   mrb_define_class_method(mrb, _class_sha1, "sha1_hex", mrb_sha1_hex, ARGS_REQ(1));
 }
 
