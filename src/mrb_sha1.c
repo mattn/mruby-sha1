@@ -52,4 +52,8 @@ mrb_mruby_sha1_gem_init(mrb_state* mrb) {
   mrb_define_class_method(mrb, _class_sha1, "sha1_hex", mrb_sha1_hex, ARGS_REQ(1));
 }
 
+void
+mrb_mruby_sha1_gem_final(mrb_state* mrb) {
+}
+
 /* vim:set et ts=2 sts=2 sw=2 tw=0: */
