@@ -18,17 +18,17 @@ nr2char(int n) {
 static mrb_value
 mrb_sha1_hex(mrb_state *mrb, mrb_value self)
 {
-  unsigned char digest[16];
+  unsigned char digest[20];
   unsigned char digest_hex[33];
   mrb_value arg = mrb_nil_value();
   int i;
+  struct sha1_context ctx;
 
   mrb_get_args(mrb, "o", &arg);
   if (mrb_nil_p(arg) || mrb_type(arg) != MRB_TT_STRING) {
     mrb_raise(mrb, E_ARGUMENT_ERROR, "invalid argument");
   }
 
-  struct sha1_context ctx;
   sha1_starts(&ctx);
   sha1_update(&ctx, (uint8*) RSTRING_PTR(arg), RSTRING_LEN(arg));
   sha1_finish(&ctx, (uint8*)&digest[0]);
