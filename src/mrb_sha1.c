@@ -19,7 +19,7 @@ static mrb_value
 mrb_sha1_hex(mrb_state *mrb, mrb_value self)
 {
   unsigned char digest[20];
-  unsigned char digest_hex[33];
+  unsigned char digest_hex[41];
   mrb_value arg = mrb_nil_value();
   int i;
   struct sha1_context ctx;
@@ -33,13 +33,12 @@ mrb_sha1_hex(mrb_state *mrb, mrb_value self)
   sha1_update(&ctx, (uint8*) RSTRING_PTR(arg), RSTRING_LEN(arg));
   sha1_finish(&ctx, (uint8*)&digest[0]);
 
-  for (i = 0; i < 16; i++) {
+  for (i = 0; i < 20; i++) {
     digest_hex[i*2+0] = nr2char((digest[i] >> 4) & 0xf);
     digest_hex[i*2+1] = nr2char(digest[i] & 0x0f);
   }
-  digest_hex[32] = 0;
-
-  return mrb_str_new(mrb, (char*) digest_hex, 32);
+  
+  return mrb_str_new(mrb, (char*) digest_hex, 40);
 }
 
 /*********************************************************
