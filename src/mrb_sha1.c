@@ -37,8 +37,7 @@ mrb_sha1_hex(mrb_state *mrb, mrb_value self)
     digest_hex[i*2+0] = nr2char((digest[i] >> 4) & 0xf);
     digest_hex[i*2+1] = nr2char(digest[i] & 0x0f);
   }
-  // digest_hex[40] = 0;
-
+  
   return mrb_str_new(mrb, (char*) digest_hex, 40);
 }
 
